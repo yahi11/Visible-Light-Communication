@@ -1,0 +1,93 @@
+const int analogInPin = A0;
+const int PushButton = D1;
+const int ButtonPress = D2;
+const int txswitch = D5;
+//const int led = D6;
+
+int bitPosition  = 0;
+byte receivedByte = 0x00;
+bool readB = false;
+int mode = false;
+
+int PushButtonState = 0;
+int sensorValue = 0;
+int outputValue = 0;
+int txswitchstate = 0;
+
+void Push_Button(){
+  if (PushButtonState == LOW){
+    digitalWrite(ButtonPress, HIGH);
+  }
+  else{
+  digitalWrite(ButtonPress, LOW);
+  }
+}
+
+//void tx_switch(){
+  //if (txswitchstate == LOW){
+   // digitalWrite(led, HIGH);
+  //}
+  //else{
+   // digitalWrite(led, LOW);
+ // }
+//}
+ 
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(analogInPin, INPUT);
+  pinMode(PushButton, INPUT);
+  pinMode(ButtonPress, OUTPUT);
+  pinMode(txswitch, INPUT);
+  //pinMode(testled, OUTPUT);
+}
+
+
+
+void loop() {
+
+  PushButtonState = digitalRead(PushButton);
+  Push_Button();
+  txswitchState = digitalRead(txswitch):
+  // put your main code here, to run repeatedly:
+  sensorValue = analogRead(analogInPin);
+
+
+if (txswitchState == HIGH){
+    if (analogRead(AnalogInPin) < 40) {
+    Serial.print("Working")  
+    delay(5000);
+     for (int i = 0; i < 8; i++) {
+      //int intensityReading = analogRead(A0);
+      if (analogRead(AnalogInPin) > 40)
+      {
+        bitSet(recievedByte, bitPosition);
+      }
+      delay(5000);
+      bitPosition ++;
+    }
+  }
+
+  if(bitPosition >7 {
+    //Serial.write((int)receivedByte);
+    //Serial.printIn(receivedByte);
+    //if (mode){
+    Serial.write(receivedByte);
+    //}
+    bitPosition = 0;
+    receivedByte = 0x00; 
+  }
+  bitPosition = 0;
+  receivedByte = 0x00;
+}
+  else{
+    if (sensorValue > 40 )
+{
+  Serial.print("sensor = ");
+  Serial.print(sensorValue);
+  Serial.print("\n");
+}  
+  }
+delay(2000);
+}
